@@ -1,10 +1,11 @@
 import React from 'react';
 import Photo from './photo';
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 function Photowall(props) {
     return <div>
-        <a onClick={props.onNavigate} className="addIcon" href="#AddPhoto"></a>
+        <Link  className="addIcon" to="/AddPhoto"></Link>
         {/* <button onClick={props.onNavigate} className="addIcon"></button> */}
             <div className='photoGrid'>
 
