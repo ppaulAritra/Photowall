@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Title from './Title';
 import Photowall from './photowall';
 import AddPhoto from './AddPhoto';
-import { Route } from 'react-router-dom';
-import {removePost} from '../redux/Action'
+import { Route,Link } from 'react-router-dom';
+import {removePost} from '../redux/Action';
+import Single from './Single'
+import Comments from './Comments'
 
 
 class Main extends Component {
@@ -17,10 +19,16 @@ class Main extends Component {
     render() {
         console.log(this.props.posts)
         return (
+
             <div>
+
+                <h1>
+                <Link to="/">Photowall</Link>
+                
+                </h1>
                 <Route exact path="/" render={() => ( //for multiple component we will use render
                     <div>
-                        <Title title={'Photowall'} />
+                        
                        <Photowall {...this.props}/>
                         {/* <Photowall posts={this.state.posts} onRemovePhoto={this.removePhoto}  /> */}
                     </div>
@@ -28,13 +36,12 @@ class Main extends Component {
 
                 {/* for single component we will use component */}
 
-                {/* <Route exact path="/AddPhoto" render={({history})=> 
-                <AddPhoto onAddPhoto={(addedPost)=>{
-                    //console.log(addedPost)
-                    this.onAddPhoto(addedPost);
-                    history.push('/')
-                }}/> 
-                }/> */}
+                <Route exact path="/AddPhoto" render={({history})=> 
+                <AddPhoto {...this.props} onHistory={history}/> 
+                }/>
+                <Route exact path="/single/:id" render={(params)=>(
+                    <Single {...this.props}{...params}/>
+                )}/>
 
             </div>
         )
